@@ -1,1 +1,22 @@
-fewbhjwfjbhfwkbgit
+What are all the types of pokemon that a pokemon can have?
+SELECT * FROM types;
+Normal
+Water
+Grass
+Rock
+Fire
+Ground
+Poison
+Bug
+Electric
+Dragon
+Steel
+Dark
+Fighting
+Psychic
+Ghost
+Fairy
+Ice
+Flying
+
+

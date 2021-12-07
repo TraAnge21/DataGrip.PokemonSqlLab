@@ -1,3 +1,6 @@
+
+PART 2 :
+
 1. What are all the types of pokemon that a pokemon can have?
 SELECT * FROM types;
 Normal
@@ -31,5 +34,9 @@ There are 656 pokemons.
 SELECT COUNT(id) FROM types;
 There are 18 types.
 
+5.How many pokemons have a secondary type?
+There are 316 pokemons that have a secondary type.
 
+PART 3
 
+What is each pokemon's primary type?

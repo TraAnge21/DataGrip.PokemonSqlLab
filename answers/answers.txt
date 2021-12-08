@@ -1,7 +1,7 @@
 
 PART 2 :
 
-1. What are all the types of pokemon that a pokemon can have?
+1) What are all the types of pokemon that a pokemon can have?
 SELECT * FROM types;
 Normal
 Water
@@ -22,21 +22,99 @@ Fairy
 Ice
 Flying
 
-2. What is the name of the pokemon with id 45?
+2) What is the name of the pokemon with id 45?
 SELECT * FROM pokemon WHERE id='45' ;
 The name is "Eevee".
 
-3. How many pokemon are there?
+3) How many pokemon are there?
 SELECT COUNT(id) FROM pokemons;
 There are 656 pokemons.
 
-4.How many types are there?
+4) How many types are there?
 SELECT COUNT(id) FROM types;
 There are 18 types.
 
-5.How many pokemons have a secondary type?
+5) How many pokemons have a secondary type?
 There are 316 pokemons that have a secondary type.
 
 PART 3
 
-What is each pokemon's primary type?
+1) What is each pokemon's primary type?
+SELECT p.name, t.name FROM pokemons p JOIN pokemon.types t ON p.primary_type=t.id;
+ name        | name     |
++-------------+----------+
+| Smeargle    | Normal   |
+| Wailord     | Water    |
+| Vileplume   | Grass    |
+| Armaldo     | Rock     |
+| Cradily     | Rock     |
+| Carvanha    | Water    |
+| Numel       | Fire     |
+| Sandslash   | Ground   |
+| Ninetales   | Fire     |
+| Weepinbell  | Grass    |
+| Gloom       | Grass    |
+| Ivysaur     | Grass    |
+| Nidorino    | Poison   |
+| Nidoking    | Poison   |
+| Dugtrio     | Ground   |
+| Rhyhorn     | Ground   |
+| Persian     | Normal
+
+and many more until it reaches 656th pokemon.
+
+2) What is Rufflet's secondary type?
+SELECT p.name, t.name FROM POKEMONS p JOIN types t ON p.secondary_type=t.id WHERE p.name = 'Rufflet';
++---------+--------+
+| name    | name   |
++---------+--------+
+| Rufflet | Flying |
++---------+--------+
+
+
+3) What are the names of the pokemon that belong to the trainer with trainerID 303 ?
+SELECT p.name, t.trainerID FROM pokemon_trainer t JOIN pokemons p ON t.pokemon_id = p.id  WHERE trainerID ='303';
++-----------+-----------+
+| name      | trainerID |
++-----------+-----------+
+| Wailord   |       303 |
+| Vileplume |       303 |
++-----------+-----------+
+
+4) How many pokemon have a secondary type Poison ?
+SELECT COUNT(secondary_type) FROM pokemons WHERE secondary_type = ( SELECT id FROM types WHERE name ='Poison');
++-----------------------+
+| COUNT(secondary_type) |
++-----------------------+
+|                    31 |
++-----------------------+
+
+5) What are all the primary types and how many pokemon have that type?
+select count(*) as "count", t.name
+    -> from types t
+    -> join pokemons p
+    -> on t.id = p.primary_type
+    -> group by t.name;
++-------+----------+
+| count | name     |
++-------+----------+
+|    90 | Normal   |
+|    95 | Water    |
+|    59 | Grass    |
+|    38 | Rock     |
+|    38 | Fire     |
+|    29 | Ground   |
+|    27 | Poison   |
+|    61 | Bug      |
+|    35 | Electric |
+|    22 | Dragon   |
+|    19 | Steel    |
+|    24 | Dark     |
+|    25 | Fighting |
+|    38 | Psychic  |
+|    19 | Ghost    |
+|    14 | Fairy    |
+|    22 | Ice      |
+|     1 | Flying   |
++-------+----------+
+There are 18 pokemons that have that type.

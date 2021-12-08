@@ -1,4 +1,23 @@
 
+PART 1)
+1) Create your pokemon schema
+CREATE SCHEMA pokemon;
+
+
+2) USE OF THE DATABASES
+USE pokemon;
+
+
+3) Import table
+mysql -u root -p pokemon </Users/tra/dev/DataGrip.PokemonSqlab/pokemon_sql/pokemon_types.sql
+
+mysql -u root -p pokemon </Users/tra/dev/DataGrip.PokemonSqlab/pokemon_sql/pokemon_trainers.sql
+
+mysql -u root -p pokemon </Users/tra/dev/DataGrip.PokemonSqlab/pokemon_sql/pokemon_pokemons.sql
+
+mysql -u root -p pokemon </Users/tra/dev/DataGrip.PokemonSqlab/pokemon_sql/pokemon_pokemon_trainer.sql
+
+
 PART 2 :
 
 1) What are all the types of pokemon that a pokemon can have?
@@ -35,6 +54,8 @@ SELECT COUNT(id) FROM types;
 There are 18 types.
 
 5) How many pokemons have a secondary type?
+
+SELECT COUNT(secondary_type) FROM pokemons WHERE secondary_type IS NOT NULL;
 There are 316 pokemons that have a secondary type.
 
 PART 3
@@ -118,3 +139,56 @@ select count(*) as "count", t.name
 |     1 | Flying   |
 +-------+----------+
 There are 18 pokemons that have that type.
+
+6)How many pokemon at level 100 does each trainer with at least one level 100 pokemone have? (Hint: your query should not display a trainer
+SELECT COUNT(*) as "count", p.trainerID FROM pokemon_trainer p WHERE p.pokelevel = 100 GROUP BY p.trainerID;
+We have 194 pokemon at level 100.
+ count | trainerID |
++-------+-----------+
+|     6 |      1258 |
+|     6 |      1259 |
+|     6 |      1260 |
+|     6 |      1261 |
+|     6 |      1262 |
+|     6 |      1263 |
+|     6 |      1264 |
+|     6 |      1265 |
+|     6 |      1266 |
+|     6 |      1267 |
+|     6 |      1268 |
+|     6 |      1269 |
+|     6 |      1270 |
+|     6 |      1271
+and many more...
+
+
+7)How many pokemon only belong to one trainer and no other?
+SELECT COUNT(trainerID), pt.pokemon_id
+    -> FROM pokemon_trainer pt
+    -> JOIN pokemons p
+    -> ON p.id = pt.pokemon_id
+    -> GROUP BY pt.pokemon_id
+    -> HAVING COUNT(trainerID) = 1;
+
+    There are 13 pokemons.
++-------+------------+
+| count | pokemon_id |
++-------+------------+
+|     1 |        592 |
+|     1 |        593 |
+|     1 |        606 |
+|     1 |        644 |
+|     1 |        646 |
+|     1 |        647 |
+|     1 |        649 |
+|     1 |        650 |
+|     1 |        651 |
+|     1 |        652 |
+|     1 |        653 |
+|     1 |        655 |
+|     1 |        656 |
++-------+------------+
+
+Part 4:
+
+1)
